@@ -4,7 +4,7 @@ from starlette.requests import Request
 import ray
 from ray import serve
 
-@serve.deployment(num_replicas=1, ray_actor_options={"num_cpus": 0.2, "num_gpus": 0})
+@serve.deployment(num_replicas=1, ray_actor_options={"num_cpus": 1, "num_gpus": 1})
 class Translator:
     def __init__(self):
         # Load model
