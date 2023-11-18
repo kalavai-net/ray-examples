@@ -15,7 +15,7 @@ class PredictDeployment:
             torch_dtype=torch.float16,
             low_cpu_mem_usage=True,
             device_map="auto",  # automatically makes use of all GPUs available to the Actor
-            load_in_8bit=True
+            #load_in_8bit=True
         )
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_id)
