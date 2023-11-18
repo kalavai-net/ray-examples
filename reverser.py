@@ -20,7 +20,7 @@ class Reverser:
         return text.reverse()
 
     async def __call__(self, http_request: Request) -> str:
-        english_text: str = await http_request.json()
+        english_text: str = await http_request.json()["text"]
         return self.reverse(english_text)
 
 app = Reverser.bind()
