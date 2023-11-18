@@ -23,7 +23,7 @@ spec:
             - transformers[torch]
             - bitsandbytes
         deployments:
-          - name: 8bit_llm
+          - name: PredictDeployment
             num_replicas: 1
             ray_actor_options:
               num_cpus: 1
