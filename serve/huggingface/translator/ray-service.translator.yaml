@@ -20,7 +20,7 @@ spec:
           working_dir: "https://github.com/AdamRTomkins/RayExamples/archive/refs/heads/main.zip"
           pip:
             - requests
-            - transformers
+            - transformers[torch]
         deployments:
           - name: Translator
             num_replicas: 1
