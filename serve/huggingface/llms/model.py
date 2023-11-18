@@ -46,4 +46,5 @@ class PredictDeployment:
                 prompts.append(text)
         return self.generate(prompts)
 
+model_id = "facebook/opt-125m"
 deployment = PredictDeployment.bind(model_id=model_id)
