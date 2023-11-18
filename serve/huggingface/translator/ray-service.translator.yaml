@@ -22,7 +22,7 @@ spec:
             - requests
             - transformers
         deployments:
-          - name: translator
+          - name: Translator
             num_replicas: 1
             ray_actor_options:
               num_cpus: 1
