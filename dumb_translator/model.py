@@ -1,26 +1,27 @@
-# File name: model.py
+import requests
 from starlette.requests import Request
+from typing import Dict
 
-import ray
 from ray import serve
 
-@serve.deployment(num_replicas=1, ray_actor_options={"num_cpus": 1, "num_gpus": 1})
-class Translator:
-    def __init__(self):
-        # Load model
-        pass
 
-    def translate(self, text: str) -> str:
-        # Run inference
-        #model_output = self.model(text)
+# 1: Define a Ray Serve application.
+@serve.deployment
+class MyModelDeployment:
+    def __init__(self, msg: str):
+        # Initialize model state: could be very large neural net weights.
+        self._msg = msg
 
-        # Post-process output to return only the translation text
-        #translation = model_output[0]["translation_text"]
+    def __call__(self, request: Request) -> Dict:
+        return {"result": self._msg}
 
-        return text.reverse()
 
-    async def __call__(self, http_request: Request) -> str:
-        english_text: str = await http_request.json()
-        return self.translate(english_text)
+translator_app = MyModelDeployment.bind(msg="Hello world!")
 
-translator_app = Translator.bind()
+# 2: Deploy the application locally.
+#serve.run(app, route_prefix="/")
+
+# 3: Query the application and print the result.
+#print(requests.get("http://localhost:8000/").json())
+# {'result': 'Hello world!'}
+#translator_app = Translator.bind()
