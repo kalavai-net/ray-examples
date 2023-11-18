@@ -22,12 +22,13 @@ spec:
             - requests
             - transformers[torch]
             - bitsandbytes
+            - accelerate
         deployments:
           - name: PredictDeployment
             num_replicas: 1
             ray_actor_options:
               num_cpus: 1
-              num_gpus: 2
+              num_gpus: 1
   rayClusterConfig:
     rayVersion: '2.8.0' # should match the Ray version in the image of the containers
     ######################headGroupSpecs#################################
