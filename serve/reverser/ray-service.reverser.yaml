@@ -17,7 +17,7 @@ spec:
         import_path: serve.reverser.reverser.app
         route_prefix: /
         runtime_env:
-          working_dir: "https://github.com/AdamRTomkins/RayExamples/archive/refs/heads/main.zip"
+          working_dir: "https://github.com/kalavai-net/ray-examples/archive/refs/heads/main.zip"
           pip:
             - requests
         deployments:

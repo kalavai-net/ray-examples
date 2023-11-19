@@ -17,7 +17,7 @@ spec:
         import_path: serve.huggingface.llms.model.deployment
         route_prefix: /
         runtime_env:
-          working_dir: "https://github.com/AdamRTomkins/RayExamples/archive/refs/heads/main.zip"
+          working_dir: "https://github.com/kalavai-net/ray-examples/archive/refs/heads/main.zip"
           pip:
             - accelerate>=0.16.0
             - transformers>=4.26.0
