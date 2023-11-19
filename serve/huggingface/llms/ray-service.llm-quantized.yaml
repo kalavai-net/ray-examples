@@ -13,7 +13,7 @@ spec:
   # Only one of serveConfig and serveConfigV2 should be used.
   serveConfigV2: |
     applications:
-      - name: 8bit_llm
+      - name: llm_4bit
         import_path: serve.huggingface.llms.model_quantized.deployment
         route_prefix: /
         runtime_env:

@@ -44,5 +44,5 @@ class PredictDeployment:
                 prompts.append(text)
         return self.generate(prompts)
 
-model_id = "bigscience/bloom-2b5"
+model_id = "bigscience/bloom-3b"
 deployment = PredictDeployment.bind(model_id=model_id)
