@@ -5,7 +5,7 @@
 apiVersion: ray.io/v1alpha1
 kind: RayService
 metadata:
-  name: rs-llm-8bit
+  name: rs-llm-singlegpu
 spec:
   serviceUnhealthySecondThreshold: 900 # Config for the health check threshold for Ray Serve applications. Default value is 900.
   deploymentUnhealthySecondThreshold: 300 # Config for the health check threshold for Ray dashboard agent. Default value is 300.
@@ -13,7 +13,7 @@ spec:
   # Only one of serveConfig and serveConfigV2 should be used.
   serveConfigV2: |
     applications:
-      - name: 8bit_llm
+      - name: llm
         import_path: serve.huggingface.llms.model.deployment
         route_prefix: /
         runtime_env:
@@ -45,9 +45,10 @@ spec:
         spec:
           containers:
             - name: ray-head
-              image: 159.65.30.72:32000/ray:2.8.0
+              image: 159.65.30.72:32000/ray:2.8.0-py39-gpu # question does the head need gpu?
               resources:
                 limits:
+                  nvidia.com/gpu: 1
                   cpu: 2
                   memory: 2Gi
                 requests:
@@ -85,6 +86,7 @@ spec:
                       command: ["/bin/sh","-c","ray stop"]
                 resources:
                   limits:
+                    nvidia.com/gpu: 1
                     cpu: "1"
                     memory: "2Gi"
                   requests:

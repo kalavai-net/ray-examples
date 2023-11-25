@@ -24,3 +24,10 @@ A set of Ray Examples to demonstrate Ray Deployments on Kalavai
 6. Llama FT
 7. Mistral FT
 8. 
+
+# Questions:
+
+## What Images are available:
+
+We may use [This ML-2.8.0-py39-gpu image](https://hub.docker.com/layers/rayproject/ray-ml/2.8.0-py39-gpu/images/sha256-1ae169efd0600a143ee2b63b6653f4d950f88e01499643952ef1c9e83810f8ed?context=explore)
+

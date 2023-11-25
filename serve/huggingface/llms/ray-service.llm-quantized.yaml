@@ -21,8 +21,7 @@ spec:
           pip:
             - bitsandbytes
             - accelerate>=0.16.0
-            - transformers>=4.26.0
-            - numpy<1.24
+            - transformers==4.32.0
             - torch
         deployments:
           - name: PredictDeployment
