@@ -50,10 +50,10 @@ spec:
                 limits:
                   nvidia.com/gpu: 1
                   cpu: 2
-                  memory: 2Gi
+                  memory: 8Gi
                 requests:
                   cpu: 2
-                  memory: 2Gi
+                  memory: 8Gi
               ports:
                 - containerPort: 6379
                   name: gcs-server
@@ -88,7 +88,7 @@ spec:
                   limits:
                     nvidia.com/gpu: 1
                     cpu: "1"
-                    memory: "2Gi"
+                    memory: "8Gi"
                   requests:
                     cpu: "500m"
-                    memory: "2Gi"
+                    memory: "8Gi"
