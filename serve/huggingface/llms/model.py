@@ -2,6 +2,7 @@ import pandas as pd
 
 from ray import serve
 from starlette.requests import Request
+import os
 
 
 @serve.deployment(ray_actor_options={"num_gpus": 1})
@@ -10,6 +11,7 @@ class PredictDeployment:
         from transformers import AutoModelForCausalLM, AutoTokenizer
         import torch
     
+        # TODO move to model params in a JSON env var that can be pulled in and passed as arguments
         self.model = AutoModelForCausalLM.from_pretrained(
             model_id,
             torch_dtype=torch.float16,
@@ -24,6 +26,7 @@ class PredictDeployment:
             self.model.device
         )
 
+        # TODO: Moce to generate_params
         gen_tokens = self.model.generate(
             input_ids,
             do_sample=True,
@@ -45,5 +48,5 @@ class PredictDeployment:
                 prompts.append(text)
         return self.generate(prompts)
 
-model_id = "facebook/opt-125m"
+model_id = os.environ.get("MODEL_ID")
 deployment = PredictDeployment.bind(model_id=model_id)
