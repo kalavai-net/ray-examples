@@ -3,7 +3,6 @@ import pandas as pd
 from ray import serve
 from starlette.requests import Request
 
-import os
 
 @serve.deployment(ray_actor_options={"num_gpus": 1})
 class PredictDeployment:
@@ -31,15 +30,8 @@ class PredictDeployment:
             temperature=0.9,
             max_length=100,
         )
-
-        generations = self.tokenizer.batch_decode(gen_tokens)
-
-        generations["responses"].append(
-            os.environ.get('MODEL_ID',"ENV not set")
-        )
-        
         return pd.DataFrame(
-            generations, columns=["responses"]
+            self.tokenizer.batch_decode(gen_tokens), columns=["responses"]
         )
 
     async def __call__(self, http_request: Request) -> str:
@@ -53,7 +45,5 @@ class PredictDeployment:
                 prompts.append(text)
         return self.generate(prompts)
 
-model_id = os.environ.get('MODEL_ID',"facebook/opt-125m")
-print("Model ID", model_id)
-
+model_id = "facebook/opt-125m"
 deployment = PredictDeployment.bind(model_id=model_id)
