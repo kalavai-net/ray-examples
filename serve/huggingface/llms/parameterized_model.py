@@ -105,6 +105,10 @@ json_env_vars = [
 for env_var in json_env_vars:
     env_var_val = os.environ.get(env_var)
     if env_var_val:
-        params[env_var.lower()] = json.loads(env_var_val)
+        try:
+            params[env_var.lower()] = json.loads(env_var_val)
+        except:
+            logger.info(f"Failed to load env var {env_var} with value {env_var_val}")
+
 
 deployment = PredictDeployment.bind(**params)
